@@ -58,6 +58,30 @@ class AppFooter extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                width: 250,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Latest Offers',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 12),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Email address',
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.all(12),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Subscribe'),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ],
