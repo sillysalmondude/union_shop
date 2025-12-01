@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import '../../utils/validation.dart';
 
 class AppFooter extends StatelessWidget {
   const AppFooter({super.key});
+
+  void handleSubscribe(BuildContext context, String email) {
+    if (isValidEmail(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Thank you for subscribing!'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter a valid email address'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,26 +77,34 @@ class AppFooter extends StatelessWidget {
               ),
               SizedBox(
                 width: 250,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Latest Offers',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 12),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Email address',
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.all(12),
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Subscribe'),
-                    ),
-                  ],
+                child: Builder(
+                  builder: (context) {
+                    final emailController = TextEditingController();
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Latest Offers',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
+                        SizedBox(height: 12),
+                        TextField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            hintText: 'Email address',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.all(12),
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        ElevatedButton(
+                          onPressed: () {
+                            handleSubscribe(context, emailController.text);
+                          },
+                          child: Text('Subscribe'),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
