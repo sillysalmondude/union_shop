@@ -5,15 +5,54 @@ class AppHeader extends StatelessWidget {
   const AppHeader({super.key});
 
   void placeholderCallbackForButtons() {
-    // tbd
+    //
   }
 
   void navigateToHome(BuildContext context) {
     AppRoutes.navigateToAndClear(context, AppRoutes.home);
   }
 
+  Widget buildNavButton(BuildContext context, String label, String route) {
+    return TextButton(
+      onPressed: () => AppRoutes.navigateTo(context, route),
+      child: Text(label),
+    );
+  }
+
+  Widget buildNavItem(BuildContext context, String label, String route) {
+    return ListTile(
+      title: Text(label),
+      onTap: () {
+        Navigator.pop(context);
+        AppRoutes.navigateTo(context, route);
+      },
+    );
+  }
+
+  void showMobileMenu(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              buildNavItem(context, 'Shop', AppRoutes.shop),
+              buildNavItem(context, 'Print Shop', AppRoutes.printShop),
+              buildNavItem(context, 'Sale', AppRoutes.sale),
+              buildNavItem(context, 'About', AppRoutes.about),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isMobile = MediaQuery.of(context).size.width < 768;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -23,10 +62,13 @@ class AppHeader extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8),
             color: const Color(0xFF4d2963),
-            child: const Text(
+            child: Text(
               'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
             ),
           ),
           Container(
@@ -35,9 +77,7 @@ class AppHeader extends StatelessWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () {
-                    navigateToHome(context);
-                  },
+                  onTap: () => navigateToHome(context),
                   child: Image.network(
                     'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                     height: 18,
@@ -56,83 +96,32 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () =>
-                          AppRoutes.navigateTo(context, AppRoutes.shop),
-                      child: const Text('Shop'),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          AppRoutes.navigateTo(context, AppRoutes.printShop),
-                      child: const Text('Print Shop'),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          AppRoutes.navigateTo(context, AppRoutes.sale),
-                      child: const Text('Sale'),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          AppRoutes.navigateTo(context, AppRoutes.about),
-                      child: const Text('About'),
-                    ),
-                  ],
-                ),
-                const Spacer(),
+                if (!isMobile) ...[
+                  buildNavButton(context, 'Shop', AppRoutes.shop),
+                  buildNavButton(context, 'Print Shop', AppRoutes.printShop),
+                  buildNavButton(context, 'Sale', AppRoutes.sale),
+                  buildNavButton(context, 'About', AppRoutes.about),
+                  const Spacer(),
+                ],
                 IconButton(
-                  icon: const Icon(
-                    Icons.search,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
+                  icon: const Icon(Icons.search, size: 18, color: Colors.grey),
                   onPressed: placeholderCallbackForButtons,
                 ),
                 IconButton(
-                  icon: const Icon(
-                    Icons.person_outline,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
+                  icon: const Icon(Icons.person_outline,
+                      size: 18, color: Colors.grey),
                   onPressed: placeholderCallbackForButtons,
                 ),
                 IconButton(
-                  icon: const Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
+                  icon: const Icon(Icons.shopping_bag_outlined,
+                      size: 18, color: Colors.grey),
                   onPressed: placeholderCallbackForButtons,
                 ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.menu,
-                    size: 18,
-                    color: Colors.grey,
+                if (isMobile)
+                  IconButton(
+                    icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
+                    onPressed: () => showMobileMenu(context),
                   ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
-                  onPressed: placeholderCallbackForButtons,
-                ),
               ],
             ),
           ),
