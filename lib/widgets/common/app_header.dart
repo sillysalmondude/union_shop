@@ -38,6 +38,7 @@ class AppHeader extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              buildNavItem(context, 'Home', AppRoutes.home),
               buildNavItem(context, 'Shop', AppRoutes.shop),
               buildNavItem(context, 'Print Shop', AppRoutes.printShop),
               buildNavItem(context, 'Sale', AppRoutes.sale),
@@ -97,6 +98,7 @@ class AppHeader extends StatelessWidget {
                 ),
                 const Spacer(),
                 if (!isMobile) ...[
+                  buildNavButton(context, 'Home', AppRoutes.home),
                   buildNavButton(context, 'Shop', AppRoutes.shop),
                   buildNavButton(context, 'Print Shop', AppRoutes.printShop),
                   buildNavButton(context, 'Sale', AppRoutes.sale),
