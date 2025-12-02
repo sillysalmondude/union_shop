@@ -4,6 +4,7 @@ import 'dart:convert';
 import '../widgets/common/app_header.dart';
 import '../widgets/common/app_footer.dart';
 import '../models/product.dart';
+import '../widgets/shop/product_card.dart';
 
 class ShopScreen extends StatelessWidget {
   const ShopScreen({super.key});
@@ -23,7 +24,7 @@ class ShopScreen extends StatelessWidget {
             const AppHeader(),
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.all(40.0),
+              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 40),
               child: Column(
                 children: [
                   const Text(
@@ -39,11 +40,24 @@ class ShopScreen extends StatelessWidget {
                     future: loadProducts(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError || !snapshot.hasData) {
-                        return Text('Unable to load products');
+                        return const Text('Unable to load products');
                       }
 
                       final products = snapshot.data!;
-                      return Text('valid');
+                      return GridView.count(
+                        shrinkWrap: true,
+                        crossAxisCount:
+                            MediaQuery.of(context).size.width > 768 ? 3 : 1,
+                        crossAxisSpacing: 24,
+                        mainAxisSpacing: 48,
+                        children: products.map((product) {
+                          return ProductCard(
+                            title: product.title,
+                            price: product.priceFormatted,
+                            imageAsset: product.asset,
+                          );
+                        }).toList(),
+                      );
                     },
                   ),
                 ],
