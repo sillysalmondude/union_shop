@@ -1,0 +1,26 @@
+[
+  {
+    "id": "mug",
+    "title": "UoP Mug",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
+    "price": 1.0,
+    "asset": "assets/mugs.jpg",
+    "collection": "accessories",
+    "stock": 5,
+    "sizes": [],
+    "colors": [],
+    "saleDiscount": 10
+  },
+  {
+    "id": "tshirt",
+    "title": "UoP T-Shirt",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
+    "price": 10.0,
+    "asset": "assets/tshirts.jpg",
+    "collection": "clothes",
+    "stock": 10,
+    "sizes": ["Small", "Medium", "Large"],
+    "colors": ["Red", "Black", "Blue"],
+    "saleDiscount": 0
+  }
+]

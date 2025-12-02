@@ -96,7 +96,7 @@ class _PrintShopScreenState extends State<PrintShopScreen> {
                             ),
                             const SizedBox(height: 20),
                             const Text(
-                              '£3 for one line of text! £5 for two!',
+                              '£3 for one line of text! £5 for two!\n\nOne line of text is 10 characters.\n\nPlease ensure all spellings are correct before submitting your purchase as we will print your item with the exact wording you provide. We will not be responsible for any incorrect spellings printed onto your garment. Personalised items do not qualify for refunds.',
                               style: TextStyle(fontSize: 16),
                             ),
                             const SizedBox(height: 30),
@@ -156,6 +156,7 @@ class _PrintShopScreenState extends State<PrintShopScreen> {
                             const SizedBox(height: 20),
                             if (numberOfLines >= 1)
                               TextField(
+                                maxLength: 10,
                                 decoration: const InputDecoration(
                                   labelText: 'Line 1',
                                   border: OutlineInputBorder(),
@@ -169,6 +170,7 @@ class _PrintShopScreenState extends State<PrintShopScreen> {
                             const SizedBox(height: 10),
                             if (numberOfLines >= 2)
                               TextField(
+                                maxLength: 10,
                                 decoration: const InputDecoration(
                                   labelText: 'Line 2',
                                   border: OutlineInputBorder(),
@@ -182,6 +184,7 @@ class _PrintShopScreenState extends State<PrintShopScreen> {
                             const SizedBox(height: 10),
                             if (numberOfLines >= 3)
                               TextField(
+                                maxLength: 10,
                                 decoration: const InputDecoration(
                                   labelText: 'Line 3',
                                   border: OutlineInputBorder(),

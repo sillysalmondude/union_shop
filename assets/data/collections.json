@@ -1,0 +1,14 @@
+[
+  {
+    "id": "clothes",
+    "name": "Clothes",
+    "description": "Portsmouth University clothes",
+    "asset": "assets/shirts.jpg"
+  },
+  {
+    "id": "accessories",
+    "name": "Accessories",
+    "description": "Portsmouth University accessories",
+    "asset": "assets/mugs.jpg"
+  }
+]
