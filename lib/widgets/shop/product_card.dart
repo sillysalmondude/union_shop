@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
+  final String id;
   final String title;
   final String price;
   final String imageAsset;
 
   const ProductCard({
     super.key,
+    required this.id,
     required this.title,
     required this.price,
     required this.imageAsset,
@@ -14,21 +16,18 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          '/product/$id',
+        );
+      },
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
           child: Image.asset(
             imageAsset,
             fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                color: Colors.grey[300],
-                child: const Center(
-                  child: Icon(Icons.image_not_supported, color: Colors.grey),
-                ),
-              );
-            },
           ),
         ),
         const SizedBox(height: 8),
@@ -51,7 +50,7 @@ class ProductCard extends StatelessWidget {
           ),
           textAlign: TextAlign.left,
         ),
-      ],
+      ]),
     );
   }
 }

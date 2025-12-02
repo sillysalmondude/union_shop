@@ -19,10 +19,25 @@ class UnionShopApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
         useMaterial3: true,
       ),
-      // Set initial route
       initialRoute: AppRoutes.home,
-      // Use config variables for routing
       routes: AppRoutes.getRoutes(),
+      // for products to correctly handle deep links
+      onGenerateRoute: (settings) {
+        final uri = Uri.parse(settings.name ?? '/');
+
+        if (uri.pathSegments.length == 2 && uri.pathSegments[0] == 'product') {
+          return MaterialPageRoute(
+            builder: (context) =>
+                AppRoutes.getRoutes()[AppRoutes.productDetail]!(context),
+            settings: RouteSettings(
+              name: settings.name,
+              arguments: uri.pathSegments[1],
+            ),
+          );
+        }
+
+        return null;
+      },
     );
   }
 }
