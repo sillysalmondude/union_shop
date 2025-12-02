@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 import '../widgets/common/app_header.dart';
 import '../widgets/common/app_footer.dart';
 
-class PrintShopScreen extends StatelessWidget {
+class PrintShopScreen extends StatefulWidget {
   const PrintShopScreen({super.key});
+
+  @override
+  State<PrintShopScreen> createState() => _PrintShopScreenState();
+}
+
+class _PrintShopScreenState extends State<PrintShopScreen> {
+  int numberOfLines = 1;
+  double fontSize = 24.0;
+  String line1 = '';
+  String line2 = '';
+  String line3 = '';
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +44,42 @@ class PrintShopScreen extends StatelessWidget {
                       ConstrainedBox(
                         constraints:
                             const BoxConstraints(minWidth: 300, maxWidth: 600),
-                        child: Image.asset('assets/hoodies_sweatshirts.jpg'),
+                        child: Container(
+                          height: 400,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            color: Colors.grey[100],
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                if (line1.isNotEmpty)
+                                  Text(
+                                    line1,
+                                    style: TextStyle(fontSize: fontSize),
+                                  ),
+                                if (line2.isNotEmpty)
+                                  Text(
+                                    line2,
+                                    style: TextStyle(fontSize: fontSize),
+                                  ),
+                                if (line3.isNotEmpty)
+                                  Text(
+                                    line3,
+                                    style: TextStyle(fontSize: fontSize),
+                                  ),
+                                if (line1.isEmpty &&
+                                    line2.isEmpty &&
+                                    line3.isEmpty)
+                                  const Text(
+                                    'Preview',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                       ConstrainedBox(
                         constraints:
@@ -62,6 +108,90 @@ class PrintShopScreen extends StatelessWidget {
                                 color: Color(0xFF4d2963),
                               ),
                             ),
+                            const SizedBox(height: 40),
+                            const Text(
+                              'Number of lines:',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            DropdownButton<int>(
+                              value: numberOfLines,
+                              items: const [
+                                DropdownMenuItem(
+                                    value: 1, child: Text('1 line')),
+                                DropdownMenuItem(
+                                    value: 2, child: Text('2 lines')),
+                                DropdownMenuItem(
+                                    value: 3, child: Text('3 lines')),
+                              ],
+                              onChanged: (value) {
+                                setState(() {
+                                  numberOfLines = value!;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            const Text(
+                              'Font size:',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Slider(
+                              value: fontSize,
+                              min: 12,
+                              max: 48,
+                              divisions: 36,
+                              label: fontSize.round().toString(),
+                              onChanged: (value) {
+                                setState(() {
+                                  fontSize = value;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            if (numberOfLines >= 1)
+                              TextField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Line 1',
+                                  border: OutlineInputBorder(),
+                                ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    line1 = value;
+                                  });
+                                },
+                              ),
+                            const SizedBox(height: 10),
+                            if (numberOfLines >= 2)
+                              TextField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Line 2',
+                                  border: OutlineInputBorder(),
+                                ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    line2 = value;
+                                  });
+                                },
+                              ),
+                            const SizedBox(height: 10),
+                            if (numberOfLines >= 3)
+                              TextField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Line 3',
+                                  border: OutlineInputBorder(),
+                                ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    line3 = value;
+                                  });
+                                },
+                              ),
                           ],
                         ),
                       ),
