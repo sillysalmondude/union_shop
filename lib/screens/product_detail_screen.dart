@@ -4,8 +4,17 @@ import '../widgets/common/app_footer.dart';
 import '../models/product.dart';
 import '../utils/product_loader.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
+
+  @override
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  String? selectedSize;
+  String? selectedColor;
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +38,15 @@ class ProductDetailScreen extends StatelessWidget {
                   }
 
                   final product = snapshot.data!;
+
+                  // Set default selections
+                  if (selectedSize == null && product.sizes.isNotEmpty) {
+                    selectedSize = product.sizes.first;
+                  }
+                  if (selectedColor == null && product.colors.isNotEmpty) {
+                    selectedColor = product.colors.first;
+                  }
+
                   return Wrap(
                     spacing: 40,
                     children: [
@@ -52,6 +70,95 @@ class ProductDetailScreen extends StatelessWidget {
                             Text(
                               product.priceFormatted,
                               style: const TextStyle(fontSize: 24),
+                            ),
+                            const SizedBox(height: 24),
+                            if (product.sizes.isNotEmpty) ...[
+                              const Text(
+                                'Size',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              DropdownButton<String>(
+                                value: selectedSize,
+                                isExpanded: true,
+                                items: product.sizes.map((size) {
+                                  return DropdownMenuItem(
+                                    value: size,
+                                    child: Text(size),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedSize = value;
+                                  });
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+                            if (product.colors.isNotEmpty) ...[
+                              const Text(
+                                'Color',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              DropdownButton<String>(
+                                value: selectedColor,
+                                isExpanded: true,
+                                items: product.colors.map((color) {
+                                  return DropdownMenuItem(
+                                    value: color,
+                                    child: Text(color),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedColor = value;
+                                  });
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+                            const Text(
+                              'Quantity',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: quantity > 1
+                                      ? () {
+                                          setState(() {
+                                            quantity--;
+                                          });
+                                        }
+                                      : null,
+                                  icon: const Icon(Icons.remove),
+                                ),
+                                Text(
+                                  '$quantity',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                IconButton(
+                                  onPressed: quantity < product.stock
+                                      ? () {
+                                          setState(() {
+                                            quantity++;
+                                          });
+                                        }
+                                      : null,
+                                  icon: const Icon(Icons.add),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 24),
                             ElevatedButton(
