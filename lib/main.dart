@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'config/routes.dart';
 
 void main() {
+  usePathUrlStrategy(); // Use path urls without # prefix
   runApp(const UnionShopApp());
 }
 
