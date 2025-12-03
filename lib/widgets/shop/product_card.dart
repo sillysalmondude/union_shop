@@ -5,6 +5,8 @@ class ProductCard extends StatelessWidget {
   final String title;
   final String price;
   final String imageAsset;
+  final String? salePrice;
+  final bool isOnSale;
 
   const ProductCard({
     super.key,
@@ -12,6 +14,8 @@ class ProductCard extends StatelessWidget {
     required this.title,
     required this.price,
     required this.imageAsset,
+    this.salePrice,
+    this.isOnSale = false,
   });
 
   @override
@@ -42,13 +46,28 @@ class ProductCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 4),
-        Text(
-          price,
-          style: const TextStyle(
-            fontSize: 13,
-            color: Colors.grey,
-          ),
-          textAlign: TextAlign.left,
+        Row(
+          children: [
+            Text(
+              price,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey,
+                decoration: isOnSale ? TextDecoration.lineThrough : null,
+              ),
+            ),
+            if (isOnSale) ...[
+              const SizedBox(width: 8),
+              Text(
+                salePrice!,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ],
         ),
       ]),
     );

@@ -49,6 +49,8 @@ class ShopScreen extends StatelessWidget {
                             title: product.title,
                             price: product.priceFormatted,
                             imageAsset: product.asset,
+                            salePrice: product.salePriceFormatted,
+                            isOnSale: product.isOnSale,
                           );
                         }).toList(),
                       );

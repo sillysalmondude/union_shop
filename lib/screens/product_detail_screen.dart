@@ -67,9 +67,32 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Text(
-                              product.priceFormatted,
-                              style: const TextStyle(fontSize: 24),
+                            Row(
+                              children: [
+                                Text(
+                                  product.priceFormatted,
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    decoration: product.isOnSale
+                                        ? TextDecoration.lineThrough
+                                        : null,
+                                    color: product.isOnSale
+                                        ? Colors.grey
+                                        : Colors.black,
+                                  ),
+                                ),
+                                if (product.isOnSale) ...[
+                                  const SizedBox(width: 16),
+                                  Text(
+                                    product.salePriceFormatted,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ],
                             ),
                             const SizedBox(height: 24),
                             if (product.sizes.isNotEmpty) ...[
