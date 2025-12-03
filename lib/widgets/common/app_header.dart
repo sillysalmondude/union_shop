@@ -112,7 +112,8 @@ class AppHeader extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.person_outline,
                       size: 18, color: Colors.grey),
-                  onPressed: placeholderCallbackForButtons,
+                  onPressed: () =>
+                      AppRoutes.navigateTo(context, AppRoutes.account),
                 ),
                 IconButton(
                   icon: const Icon(Icons.shopping_bag_outlined,
