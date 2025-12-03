@@ -10,13 +10,13 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartService = CartService();
     final items = cartService.items;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             const AppHeader(),
             Container(
+              width: double.infinity,
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 40),
               child: Column(
@@ -36,7 +36,6 @@ class CartScreen extends StatelessWidget {
                       children: [
                         ListView.builder(
                           shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: items.length,
                           itemBuilder: (context, index) {
                             final item = items[index];
@@ -71,6 +70,45 @@ class CartScreen extends StatelessWidget {
                                           Text('Size: ${item.selectedSize}'),
                                         if (item.selectedColor != null)
                                           Text('Color: ${item.selectedColor}'),
+                                        const SizedBox(height: 8),
+                                        const Text(
+                                          'Quantity',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        Row(
+                                          children: [
+                                            if (item.quantity > 1)
+                                              IconButton(
+                                                onPressed: () {
+                                                  cartService.updateQuantity(
+                                                      index, item.quantity - 1);
+                                                  Navigator
+                                                      .pushReplacementNamed(
+                                                          context, '/cart');
+                                                },
+                                                icon: const Icon(Icons.remove),
+                                              ),
+                                            if (item.quantity == 1)
+                                              IconButton(
+                                                onPressed: null,
+                                                icon: const Icon(Icons.remove),
+                                              ),
+                                            Text(
+                                              '${item.quantity}',
+                                              style:
+                                                  const TextStyle(fontSize: 18),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                cartService.updateQuantity(
+                                                    index, item.quantity + 1);
+                                                Navigator.pushReplacementNamed(
+                                                    context, '/cart');
+                                              },
+                                              icon: const Icon(Icons.add),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -85,26 +123,13 @@ class CartScreen extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(height: 8),
-                                      const Text(
-                                        'Quantity',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(Icons.remove),
-                                          ),
-                                          Text(
-                                            '${item.quantity}',
-                                            style:
-                                                const TextStyle(fontSize: 18),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(Icons.add),
-                                          ),
-                                        ],
+                                      TextButton(
+                                        onPressed: () {
+                                          cartService.removeItem(index);
+                                          Navigator.pushReplacementNamed(
+                                              context, '/cart');
+                                        },
+                                        child: const Text('Remove'),
                                       ),
                                     ],
                                   ),
@@ -138,7 +163,18 @@ class CartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                cartService.clearCart();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Thank you! Your order has now been placed successfully.'),
+                                    duration: Duration(seconds: 3),
+                                  ),
+                                );
+                                Navigator.pushReplacementNamed(
+                                    context, '/cart');
+                              },
                               child: const Text('Checkout'),
                             ),
                           ],
