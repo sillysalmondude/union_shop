@@ -14,6 +14,7 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   String selectedCollection = 'all';
+  String selectedSort = 'none';
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +69,45 @@ class _ShopScreenState extends State<ShopScreen> {
                           });
                         },
                       ),
+                      const SizedBox(width: 32),
+                      const Text(
+                        'Sort by:',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      DropdownButton<String>(
+                        value: selectedSort,
+                        items: const [
+                          DropdownMenuItem(
+                            value: 'none',
+                            child: Text('None'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'name_asc',
+                            child: Text('A-Z'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'name_desc',
+                            child: Text('Z-A'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'price_low',
+                            child: Text('Price: Low to High'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'price_high',
+                            child: Text('Price: High to Low'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            selectedSort = value!;
+                          });
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 40),
@@ -79,12 +119,23 @@ class _ShopScreenState extends State<ShopScreen> {
                       }
 
                       final allProducts = snapshot.data!;
-                      final products = selectedCollection == 'all'
+                      var products = selectedCollection == 'all'
                           ? allProducts
                           : allProducts
                               .where((product) =>
                                   product.collection == selectedCollection)
                               .toList();
+
+                      // Apply sorting
+                      if (selectedSort == 'name_asc') {
+                        products.sort((a, b) => a.title.compareTo(b.title));
+                      } else if (selectedSort == 'name_desc') {
+                        products.sort((a, b) => b.title.compareTo(a.title));
+                      } else if (selectedSort == 'price_low') {
+                        products.sort((a, b) => a.price.compareTo(b.price));
+                      } else if (selectedSort == 'price_high') {
+                        products.sort((a, b) => b.price.compareTo(a.price));
+                      }
 
                       if (products.isEmpty) {
                         return const Text('No products found');
