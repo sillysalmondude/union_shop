@@ -37,76 +37,87 @@ class _ShopScreenState extends State<ShopScreen> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  Row(
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
                     children: [
-                      const Text(
-                        'Collection:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      DropdownButton<String>(
-                        value: selectedCollection,
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'all',
-                            child: Text('All'),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'Collection:',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          DropdownMenuItem(
-                            value: 'accessories',
-                            child: Text('Accessories'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'clothes',
-                            child: Text('Clothes'),
-                          ),
-                        ],
-                        onChanged: (value) {
-                          setState(() {
-                            selectedCollection = value!;
-                          });
-                        },
-                      ),
-                      const SizedBox(width: 32),
-                      const Text(
-                        'Sort by:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      DropdownButton<String>(
-                        value: selectedSort,
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'none',
-                            child: Text('None'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'name_asc',
-                            child: Text('A-Z'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'name_desc',
-                            child: Text('Z-A'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'price_low',
-                            child: Text('Price: Low to High'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'price_high',
-                            child: Text('Price: High to Low'),
+                          const SizedBox(width: 16),
+                          DropdownButton<String>(
+                            value: selectedCollection,
+                            items: const [
+                              DropdownMenuItem(
+                                value: 'all',
+                                child: Text('All'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'accessories',
+                                child: Text('Accessories'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'clothes',
+                                child: Text('Clothes'),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                selectedCollection = value!;
+                              });
+                            },
                           ),
                         ],
-                        onChanged: (value) {
-                          setState(() {
-                            selectedSort = value!;
-                          });
-                        },
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'Sort by:',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          DropdownButton<String>(
+                            value: selectedSort,
+                            items: const [
+                              DropdownMenuItem(
+                                value: 'none',
+                                child: Text('None'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'name_asc',
+                                child: Text('A-Z'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'name_desc',
+                                child: Text('Z-A'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'price_low',
+                                child: Text('Price: Low to High'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'price_high',
+                                child: Text('Price: High to Low'),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                selectedSort = value!;
+                              });
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
