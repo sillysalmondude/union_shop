@@ -1,7 +1,7 @@
 [
   {
     "id": "mug",
-    "title": "UoP Mug",
+    "title": "Mug",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
     "price": 1.0,
     "asset": "assets/mugs.jpg",
@@ -13,7 +13,7 @@
   },
   {
     "id": "tshirt",
-    "title": "UoP T-Shirt",
+    "title": "T-Shirt",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
     "price": 10.0,
     "asset": "assets/tshirt.jpg",
@@ -24,27 +24,51 @@
     "saleDiscount": 0
   },
   {
-    "id": "tshirt_two",
-    "title": "UoP T-Shirt",
+    "id": "beanie",
+    "title": "Beanie",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
-    "price": 10.0,
-    "asset": "assets/tshirt.jpg",
+    "price": 15.0,
+    "asset": "assets/beanie.jpg",
     "collection": "clothes",
-    "stock": 10,
-    "sizes": ["Small", "Medium", "Large"],
+    "stock": 15,
+    "sizes": ["Small/Medium", "Large/Extra Large"],
+    "colors": [],
+    "saleDiscount": 0
+  },
+  {
+    "id": "essentials",
+    "title": "Essentials",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
+    "price": 20.0,
+    "asset": "assets/essentials.jpg",
+    "collection": "accessories",
+    "stock": 20,
+    "sizes": [],
+    "colors": [],
+    "saleDiscount": 0
+  },
+  {
+    "id": "cap",
+    "title": "Cap",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
+    "price": 12.0,
+    "asset": "assets/cap.jpg",
+    "collection": "clothes",
+    "stock": 12,
+    "sizes": [],
     "colors": ["Red", "Black", "Blue"],
     "saleDiscount": 0
   },
   {
-    "id": "tshirt_three",
-    "title": "UoP T-Shirt",
+    "id": "hoodie",
+    "title": "Hoodie",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam aliquet.",
-    "price": 10.0,
-    "asset": "assets/tshirt.jpg",
+    "price": 25.0,
+    "asset": "assets/hoodies.jpg",
     "collection": "clothes",
-    "stock": 10,
+    "stock": 25,
     "sizes": ["Small", "Medium", "Large"],
-    "colors": ["Red", "Black", "Blue"],
-    "saleDiscount": 0
+    "colors": ["Black", "White", "Red", "Gray"],
+    "saleDiscount": 30
   }
 ]
