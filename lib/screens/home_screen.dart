@@ -9,10 +9,6 @@ import '../utils/product_loader.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +28,7 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
+                          image: AssetImage('assets/hero_background.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -54,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'Placeholder Hero Title',
+                          'Welcome to the UPSU Shop',
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -64,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         const Text(
-                          "This is placeholder text for the hero section.",
+                          "Find your perfect fit at UPSU Shop!",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
@@ -74,7 +68,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 32),
                         ElevatedButton(
-                          onPressed: placeholderCallbackForButtons,
+                          onPressed: () =>
+                              AppRoutes.navigateTo(context, AppRoutes.shop),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4d2963),
                             foregroundColor: Colors.white,
@@ -122,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount:
-                              MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                              MediaQuery.of(context).size.width > 768 ? 3 : 1,
                           crossAxisSpacing: 24,
                           mainAxisSpacing: 48,
                           children: products.map((product) {
@@ -140,6 +135,44 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+            ),
+
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              padding: const EdgeInsets.all(30),
+              child: Wrap(
+                spacing: 40,
+                runSpacing: 40,
+                alignment: WrapAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 400,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Add a Personal Touch',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        const Text(
+                            'First add your item of clothing to your cart then click below to add your text! One line of text contains 10 characters!'),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () => AppRoutes.navigateTo(
+                              context, AppRoutes.printShop),
+                          child: const Text('Click here to add Text!'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Image.asset(
+                    'assets/print_shack.png',
+                    width: 350,
+                    height: 350,
+                  ),
+                ],
               ),
             ),
 
