@@ -5,8 +5,15 @@ import '../models/product.dart';
 import '../widgets/shop/product_card.dart';
 import '../utils/product_loader.dart';
 
-class ShopScreen extends StatelessWidget {
+class ShopScreen extends StatefulWidget {
   const ShopScreen({super.key});
+
+  @override
+  State<ShopScreen> createState() => _ShopScreenState();
+}
+
+class _ShopScreenState extends State<ShopScreen> {
+  String selectedCollection = 'all';
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +36,41 @@ class ShopScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40),
+                  Row(
+                    children: [
+                      const Text(
+                        'Collection:',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      DropdownButton<String>(
+                        value: selectedCollection,
+                        items: const [
+                          DropdownMenuItem(
+                            value: 'all',
+                            child: Text('All'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'accessories',
+                            child: Text('Accessories'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'clothes',
+                            child: Text('Clothes'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            selectedCollection = value!;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
                   FutureBuilder<List<Product>>(
                     future: loadProducts(),
                     builder: (context, snapshot) {
@@ -36,7 +78,18 @@ class ShopScreen extends StatelessWidget {
                         return const Text('Unable to load products');
                       }
 
-                      final products = snapshot.data!;
+                      final allProducts = snapshot.data!;
+                      final products = selectedCollection == 'all'
+                          ? allProducts
+                          : allProducts
+                              .where((product) =>
+                                  product.collection == selectedCollection)
+                              .toList();
+
+                      if (products.isEmpty) {
+                        return const Text('No products found');
+                      }
+
                       return GridView.count(
                         shrinkWrap: true,
                         crossAxisCount:
