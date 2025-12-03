@@ -41,6 +41,8 @@ class AppHeader extends StatelessWidget {
               buildNavItem(context, 'Home', AppRoutes.home),
               buildNavItem(context, 'Shop', AppRoutes.shop),
               buildNavItem(context, 'Print Shop', AppRoutes.printShop),
+              buildNavItem(
+                  context, 'Print Shop About', AppRoutes.printShopAbout),
               buildNavItem(context, 'Sale', AppRoutes.sale),
               buildNavItem(context, 'About', AppRoutes.about),
             ],
@@ -100,7 +102,29 @@ class AppHeader extends StatelessWidget {
                 if (!isMobile) ...[
                   buildNavButton(context, 'Home', AppRoutes.home),
                   buildNavButton(context, 'Shop', AppRoutes.shop),
-                  buildNavButton(context, 'Print Shop', AppRoutes.printShop),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: PopupMenuButton<String>(
+                      child: const Text(
+                        'Print Shop',
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0xFF6D5383)),
+                      ),
+                      onSelected: (value) {
+                        AppRoutes.navigateTo(context, value);
+                      },
+                      itemBuilder: (context) => const [
+                        PopupMenuItem(
+                          value: '/print-shop',
+                          child: Text('Print Shack'),
+                        ),
+                        PopupMenuItem(
+                          value: '/print-shop-about',
+                          child: Text('About'),
+                        ),
+                      ],
+                    ),
+                  ),
                   buildNavButton(context, 'Sale', AppRoutes.sale),
                   buildNavButton(context, 'About', AppRoutes.about),
                   const Spacer(),

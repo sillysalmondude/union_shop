@@ -7,6 +7,7 @@ import '../screens/about_screen.dart';
 import '../screens/product_detail_screen.dart';
 import '../screens/account_screen.dart';
 import '../screens/cart_screen.dart';
+import '../screens/print_shop_about_screen.dart';
 
 class AppRoutes {
   static const String home = '/';
@@ -18,6 +19,7 @@ class AppRoutes {
   static const String productDetail = '/product';
   static const String account = '/account';
   static const String cart = '/cart';
+  static const String printShopAbout = '/print-shop-about';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -29,6 +31,7 @@ class AppRoutes {
       productDetail: (context) => const ProductDetailScreen(),
       account: (context) => const AccountScreen(),
       cart: (context) => const CartScreen(),
+      printShopAbout: (context) => const PrintShopAboutScreen(),
     };
   }
 
