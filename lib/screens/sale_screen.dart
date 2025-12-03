@@ -28,6 +28,22 @@ class SaleScreen extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Don\'t miss out! Get yours before they\'re all gone!',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'All prices shown are inclusive of the discount 🛒',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
                   const SizedBox(height: 40),
                   FutureBuilder<List<Product>>(
                     future: loadProducts(),
