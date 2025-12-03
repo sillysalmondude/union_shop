@@ -3,6 +3,7 @@ import '../widgets/common/app_header.dart';
 import '../widgets/common/app_footer.dart';
 import '../models/product.dart';
 import '../utils/product_loader.dart';
+import '../services/cart_service.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
@@ -185,7 +186,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                             const SizedBox(height: 24),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                CartService().addItem(
+                                  product,
+                                  quantity,
+                                  selectedSize,
+                                  selectedColor,
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Added to cart!'),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
+                              },
                               child: const Text('Add to cart'),
                             ),
                             const SizedBox(height: 24),
