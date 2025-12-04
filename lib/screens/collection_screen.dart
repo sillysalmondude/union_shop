@@ -47,14 +47,16 @@ class _CollectionScreenState extends State<CollectionScreen> {
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 16),
-                      Text(
-                        collection!.description,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
+                      if (collection?.description != null) ...[
+                        const SizedBox(height: 16),
+                        Text(
+                          collection!.description,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
+                      ],
                       const SizedBox(height: 40),
                       Row(
                         mainAxisSize: MainAxisSize.min,

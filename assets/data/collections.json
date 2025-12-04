@@ -3,7 +3,7 @@
     "id": "clothes",
     "name": "Clothes",
     "description": "Portsmouth University clothes",
-    "asset": "assets/shirts.jpg"
+    "asset": "assets/tshirt.jpg"
   },
   {
     "id": "accessories",

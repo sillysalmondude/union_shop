@@ -58,9 +58,8 @@ class CollectionsListScreen extends StatelessWidget {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                      'assets/print_shack_background.png'),
+                                image: DecorationImage(
+                                  image: AssetImage(collection.asset),
                                   fit: BoxFit.cover,
                                 ),
                               ),
