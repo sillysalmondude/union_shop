@@ -8,6 +8,8 @@ import '../screens/product_detail_screen.dart';
 import '../screens/account_screen.dart';
 import '../screens/cart_screen.dart';
 import '../screens/print_shop_about_screen.dart';
+import '../screens/collection_screen.dart';
+import '../screens/collections_list_screen.dart';
 
 class AppRoutes {
   static const String home = '/';
@@ -16,6 +18,7 @@ class AppRoutes {
   static const String sale = '/sale';
   static const String about = '/about';
   static const String collections = '/collections';
+  static const String collection = '/collection';
   static const String productDetail = '/product';
   static const String account = '/account';
   static const String cart = '/cart';
@@ -32,6 +35,8 @@ class AppRoutes {
       account: (context) => const AccountScreen(),
       cart: (context) => const CartScreen(),
       printShopAbout: (context) => const PrintShopAboutScreen(),
+      collections: (context) => const CollectionsListScreen(),
+      collection: (context) => const CollectionScreen(),
     };
   }
 

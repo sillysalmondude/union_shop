@@ -36,6 +36,18 @@ class UnionShopApp extends StatelessWidget {
           );
         }
 
+        if (uri.pathSegments.length == 2 &&
+            uri.pathSegments[0] == 'collection') {
+          return MaterialPageRoute(
+            builder: (context) =>
+                AppRoutes.getRoutes()[AppRoutes.collection]!(context),
+            settings: RouteSettings(
+              name: settings.name,
+              arguments: uri.pathSegments[1],
+            ),
+          );
+        }
+
         return null;
       },
     );
