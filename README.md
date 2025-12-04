@@ -67,9 +67,9 @@ Products and collections are loaded from JSON files. The cart is shared across t
 - `lib/utils/validation.dart` - Email validation helper for newsletter subscription.
 
 **Widgets**
-- `lib/widgets/common/app_header.dart` - Shared header component. Responsive navigation that shows full menu on desktop and hamburger menu on mobile. Includes popup menus for Collections and Print Shop.
-- `lib/widgets/common/app_footer.dart` - Shared footer with opening hours, help links, and newsletter subscription form.
-- `lib/widgets/shop/product_card.dart` - Reusable product card showing image, title, price, and sale price if applicable. Navigates to product detail on tap.
+- `lib/widgets/app_header.dart` - Shared header component. Responsive navigation that shows full menu on desktop and hamburger menu on mobile. Includes popup menus for Collections and Print Shop.
+- `lib/widgets/app_footer.dart` - Shared footer with opening hours, help links, and newsletter subscription form.
+- `lib/widgets/product_card.dart` - Reusable product card showing image, title, price, and sale price if applicable. Navigates to product detail on tap.
 
 **Data**
 - `assets/data/products.json` - products with variants (sizes, colors), stock levels, pricing, and sale discounts.
@@ -78,3 +78,4 @@ Products and collections are loaded from JSON files. The cart is shared across t
 **Tests**
 
 **Screenshots**
+ product

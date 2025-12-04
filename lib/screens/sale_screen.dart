@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../widgets/common/app_header.dart';
-import '../widgets/common/app_footer.dart';
+import '../widgets/app_header.dart';
+import '../widgets/app_footer.dart';
 import '../models/product.dart';
-import '../widgets/shop/product_card.dart';
+import '../widgets/product_card.dart';
 import '../utils/product_loader.dart';
 
 class SaleScreen extends StatelessWidget {

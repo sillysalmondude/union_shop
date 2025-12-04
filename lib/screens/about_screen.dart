@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/common/app_header.dart';
-import '../widgets/common/app_footer.dart';
+import '../widgets/app_header.dart';
+import '../widgets/app_footer.dart';
 import '../config/routes.dart';
 
 class AboutScreen extends StatelessWidget {
