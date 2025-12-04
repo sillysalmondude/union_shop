@@ -76,6 +76,21 @@ Products and collections are loaded from JSON files. The cart is shared across t
 - `assets/data/collections.json`
 
 **Tests**
+Run with `flutter test`.
+
+- **Screens** - HomeScreen and AboutScreen widget
+- **Widgets** - AppHeader, AppFooter, and ProductCard
+- **Models** - Product, Collection, and CartItem model
+- **Services** - CartService operations (add, remove, update, clear)
+- **Utils** - Email validation
+- **Config** - Route setup and deep linking
 
 **Screenshots**
- product
+
+![Homepage](screenshots/index.jpg)
+
+![Collections](screenshots/collections.png)
+
+![Cart](screenshots/cart.png)
+
+![Print Shack](screenshots/print_shack.png)
